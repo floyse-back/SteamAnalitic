@@ -1,3 +1,5 @@
+from typing import Annotated, List
+
 from load_dotenv import load_dotenv
 from pathlib import Path
 from pydantic import BaseModel
@@ -33,3 +35,34 @@ class TokenConfig(BaseModel):
 
     access_token_expires: int = 15
     refresh_token_expires: int = 60
+
+
+class ServiceConfig(BaseModel):
+    path:str = ""
+    tags:List = ""
+
+class ServicesConfig(BaseModel):
+    steam_service:ServiceConfig = ServiceConfig(
+        path = "/api/v1/steam",
+        tags = ["steam"]
+    )
+    analytic_service:ServiceConfig = ServiceConfig(
+        path = "/api/v1/analytics",
+        tags = ["analytics"]
+    )
+    auth_service:ServiceConfig = ServiceConfig(
+        path = "/api/v1/auth",
+        tags = ["auth"]
+    )
+    users_service:ServiceConfig = ServiceConfig(
+        path = "/api/v1/users",
+        tags = ["users"]
+    )
+    admin_service:ServiceConfig = ServiceConfig(
+        path = "/api/v1/admin",
+        tags = ["admin"]
+    )
+    notification_service:ServiceConfig = ServiceConfig(
+        path = "/api/v1/notification",
+        tags = ["notification"]
+    )
